@@ -1,11 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
 import { UserStore } from "./users.store";
+import { Subject } from "rxjs";
 
 @Controller("/user")
 export class UserController{
 
-    constructor(private store: UserStore){
-        console.log(this.store);
+    constructor(@Inject("EVENT_STORE") private eventbus: Subject<any>) {
+        console.log(this.eventbus);
     }
   
 }
